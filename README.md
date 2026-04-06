@@ -1,4 +1,3 @@
-#Student: Yermakov Ilya
-
-#Group: IT-2503
+Student: Yermakov Ilya
+Group: IT-2503
 
