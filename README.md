@@ -1,7 +1,11 @@
-Student: Yermakov Ilya
-Group: IT-2503
+# Student: Yermakov Ilya
+# Group: IT-2503
 
-<img width="426" height="351" alt="изображение" src="https://github.com/user-attachments/assets/9e553006-6840-406c-90c0-3e721199e27e" />
-<img width="509" height="400" alt="изображение" src="https://github.com/user-attachments/assets/b2ca6aaa-6634-4c62-84dd-40c9d0169600" />
+
+# Task 1
+<img width="571" height="230" alt="изображение" src="https://github.com/user-attachments/assets/1b554d4c-88d6-40f6-9418-3b41ebfb73e0" />
 
 I completed the first task and added some users.I implemented methods of adding users, showing  users and searching by username 
+
+# Task 2
+<img width="285" height="173" alt="изображение" src="https://github.com/user-attachments/assets/9f005834-50e6-465b-9af5-745819173811" />
