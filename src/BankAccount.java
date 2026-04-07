@@ -29,4 +29,16 @@ public class BankAccount {
     public String toString(){
         return "Account: " + username + " Balance: " + balance;
     }
+    public void deposit(int money) {
+        if (money > 0) {
+            this.balance += money;
+        }
+    }
+    public void withdraw(int money) {
+        if (money > 0 && money <= this.balance) {
+            this.balance -= money;
+        } else {
+            System.out.println("Not enough money or Invalid action");
+        }
+    }
 }

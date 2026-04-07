@@ -11,8 +11,10 @@ public class BankSystem {
             System.out.println("1. Add a new account");
             System.out.println("2. Show all accounts");
             System.out.println("3. Search account by username");
-            System.out.println("4. Exit");
-            System.out.println("Select an option (1/2/3/4): ");
+            System.out.println("4. Add to deposit");
+            System.out.println("5. Withdraw money");
+            System.out.println("6. Exit");
+            System.out.println("Select an option: ");
 
             int choice = sc.nextInt();
             sc.nextLine();
@@ -28,6 +30,12 @@ public class BankSystem {
                     searchByUsername();
                     break;
                 case 4:
+                    depositMoney();
+                    break;
+                case 5:
+                    withdrawMoney();
+                    break;
+                case 6:
                     System.out.println("Bye");
                     return;
                 default:
@@ -69,6 +77,48 @@ public class BankSystem {
         }
         if (!found) {
             System.out.println("Account not found");
+        }
+    }
+    public void depositMoney() {
+        System.out.println("Enter username of acc: ");
+        String name = sc.nextLine();
+
+        boolean found = false;
+
+        for (BankAccount acc : accounts) {
+            if (acc.getUsername().equalsIgnoreCase(name)) {
+                System.out.println("Deposit amount: ");
+                int amoount = sc.nextInt();
+
+                acc.deposit(amoount);
+
+                System.out.println("New balance: " + acc.getBalance());
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("Account not found");
+        }
+    }
+    public void withdrawMoney() {
+        System.out.println("Enter account username: ");
+        String name = sc.nextLine();
+
+        boolean found = false;
+        for (BankAccount acc : accounts) {
+            if (acc.getUsername().equalsIgnoreCase(name)) {
+                System.out.println("Withdraw amount: ");
+                int amount = sc.nextInt();
+
+                acc.withdraw(amount);
+                System.out.println("New balance " + acc.getBalance());
+                found = true;
+                break;
+            }
+         }
+        if (!found) {
+            System.out.println("Invalid amount or not enough for withdraw");
         }
     }
 }
