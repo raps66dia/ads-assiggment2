@@ -3,6 +3,9 @@
 
 
 # Task 1
-<img width="426" height="352" alt="изображение" src="https://github.com/user-attachments/assets/092246b2-902b-4fc4-9efa-8c3df1c0c205" />
+<img width="571" height="230" alt="изображение" src="https://github.com/user-attachments/assets/1b554d4c-88d6-40f6-9418-3b41ebfb73e0" />
 
 I completed the first task and added some users.I implemented methods of adding users, showing  users and searching by username 
+
+# Task 2
+<img width="285" height="173" alt="изображение" src="https://github.com/user-attachments/assets/9f005834-50e6-465b-9af5-745819173811" />
