@@ -31,6 +31,12 @@ This task allows to add bills payment using queue I add some bills in queue and 
 <img width="403" height="79" alt="изображение" src="https://github.com/user-attachments/assets/e13c63b2-6b1b-43b7-9a7f-75ad84ac0e25" />
 In this realize the real system as a bank with requests, firstly I created request and wait the confirmation after this I will see this request in list and I may confirm the request of user. For this I used Queue and BankAccoun
 
+# Task 6
+<img width="636" height="105" alt="изображение" src="https://github.com/user-attachments/assets/60709c02-a371-4f7c-a8a7-16f6e6df1eb9" />
+just created static data
+
+
+
 
 
 
