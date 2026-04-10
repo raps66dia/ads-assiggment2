@@ -1,19 +1,37 @@
+import java.util.Stack;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.Queue;
+import java.util.ArrayList;
 
 public class BankSystem {
     LinkedList<BankAccount> accounts = new LinkedList<>();
     Scanner sc = new Scanner(System.in);
+    Stack<String> history = new Stack<>();
+    Queue<String> billQueue = new LinkedList<>();
+    Queue<BankAccount> accountRequests = new LinkedList<>();
+    BankAccount[] dataAccount = new BankAccount[3];
     public void main(String[] args) {
+        dataAccount[0] = new BankAccount(101, "Ali", 150000);
+        dataAccount[1] = new BankAccount(102, "Ilyas", 200000);
+        dataAccount[2] = new BankAccount(103, "Almas", 67000);
 
         while (true) {
             System.out.println("--- Bank System ---");
-            System.out.println("1. Add a new account");
+            System.out.println("1. Add a new account (Request)");
             System.out.println("2. Show all accounts");
             System.out.println("3. Search account by username");
             System.out.println("4. Add to deposit");
             System.out.println("5. Withdraw money");
             System.out.println("6. Exit");
+            System.out.println("7. Last transaction");
+            System.out.println("8. Undo transaction");
+            System.out.println("9. Add bill payment");
+            System.out.println("10. Process bill");
+            System.out.println("11. Show All bills");
+            System.out.println("12. Approve account");
+            System.out.println("13. Display all request");
+            System.out.println("14. Static accounts");
             System.out.println("Select an option: ");
 
             int choice = sc.nextInt();
@@ -38,6 +56,30 @@ public class BankSystem {
                 case 6:
                     System.out.println("Bye");
                     return;
+                case 7:
+                    lastTransaction();
+                    break;
+                case 8:
+                    undoTransaction();
+                    break;
+                case 9:
+                    addBill();
+                    break;
+                case 10:
+                    processBill();
+                    break;
+                case 11:
+                    showQueue();
+                    break;
+                case 12:
+                    processAccountRequest();
+                    break;
+                case 13:
+                    displayRequests();
+                    break;
+                case 14:
+                    printAcc();
+                    break;
                 default:
                     System.out.println("Invalid action");
             }
@@ -45,14 +87,15 @@ public class BankSystem {
     }
     public void addAccount() {
         System.out.println("Enter account number: ");
-        String id = sc.nextLine();
+        int id = sc.nextInt();
+        sc.nextLine();
         System.out.println("Enter username: ");
         String username = sc.nextLine();
         System.out.println("Enter balance: ");
         int balance = sc.nextInt();
 
-        accounts.add(new BankAccount(id, username, balance));
-        System.out.println("Successfully added!");
+        accountRequests.add(new BankAccount(id, username, balance));
+        System.out.println("Request send! Waiting for Admin");
     }
     public void allAccounts() {
         if (accounts.isEmpty()) {
@@ -88,11 +131,13 @@ public class BankSystem {
         for (BankAccount acc : accounts) {
             if (acc.getUsername().equalsIgnoreCase(name)) {
                 System.out.println("Deposit amount: ");
-                int amoount = sc.nextInt();
+                int amount = sc.nextInt();
 
-                acc.deposit(amoount);
+                acc.deposit(amount);
 
-                System.out.println("New balance: " + acc.getBalance());
+                System.out.println("Deposit " + amount + " to " + name);
+                String action = "Deposit: " + amount + " to " + name;
+                history.push(action);
                 found = true;
                 break;
             }
@@ -112,7 +157,9 @@ public class BankSystem {
                 int amount = sc.nextInt();
 
                 acc.withdraw(amount);
-                System.out.println("New balance " + acc.getBalance());
+                System.out.println("Withdraw " + amount + " from " + name);
+                String action = "Withdraw " + amount + " to " + name;
+                history.push(action);
                 found = true;
                 break;
             }
@@ -121,4 +168,70 @@ public class BankSystem {
             System.out.println("Invalid amount or not enough for withdraw");
         }
     }
+    public void lastTransaction() {
+        if(!history.isEmpty()) {
+            System.out.println("Last transaction: " + history.peek());
+        } else {
+            System.out.println("History is empty");
+        }
+    }
+    public void undoTransaction() {
+        if (!history.isEmpty()) {
+            String removed = history.pop();
+            System.out.println("Undo -> " + removed + " removed");
+        } else {
+            System.out.println("Nothing to undo");
+        }
+    }
+    public void addBill() {
+        System.out.println("Enter a bill: ");
+        String bill = sc.nextLine();
+        billQueue.add(bill);
+        System.out.println("Added: " + bill);
+    }
+    public void processBill() {
+        if(billQueue.isEmpty()) {
+            System.out.println("No bill in process");
+            return;
+        }
+        String processed = billQueue.poll();
+        System.out.println("Processing: " + processed);
+        if (!billQueue.isEmpty()) {
+            System.out.println("Remaining: " + billQueue);
+        }
+    }
+    public void showQueue() {
+        if (billQueue.isEmpty()) {
+            System.out.println("No bills in queue");
+        } else {
+            System.out.println("Bills in queue: " + billQueue);
+        }
+    }
+    public void processAccountRequest() {
+        if (accountRequests.isEmpty()) {
+            System.out.println("No requests");
+            return;
+        }
+        BankAccount approvedAcc = accountRequests.poll();
+        accounts.add(approvedAcc);
+        System.out.println("Success for: " + approvedAcc.getUsername());
+        System.out.println("Account is ready");
+    }
+    public void displayRequests() {
+        if (accountRequests.isEmpty()) {
+            System.out.println("No requests");
+        } else {
+            System.out.println("---All requests---");
+            for (BankAccount request : accountRequests) {
+                System.out.println("- " + request.getUsername() + " (Initial: " + request.getBalance() + ")");
+            }
+        }
+
+    }
+    public void printAcc() {
+        for (int i = 0; i < dataAccount.length; i++) {
+            System.out.println("Static Accounts: " + dataAccount[i]);
+        }
+    }
+
 }
