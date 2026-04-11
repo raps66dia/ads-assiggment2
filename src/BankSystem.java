@@ -2,7 +2,6 @@ import java.util.Stack;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.Queue;
-import java.util.ArrayList;
 
 public class BankSystem {
     LinkedList<BankAccount> accounts = new LinkedList<>();
@@ -18,20 +17,10 @@ public class BankSystem {
 
         while (true) {
             System.out.println("--- Bank System ---");
-            System.out.println("1. Add a new account (Request)");
-            System.out.println("2. Show all accounts");
-            System.out.println("3. Search account by username");
-            System.out.println("4. Add to deposit");
-            System.out.println("5. Withdraw money");
-            System.out.println("6. Exit");
-            System.out.println("7. Last transaction");
-            System.out.println("8. Undo transaction");
-            System.out.println("9. Add bill payment");
-            System.out.println("10. Process bill");
-            System.out.println("11. Show All bills");
-            System.out.println("12. Approve account");
-            System.out.println("13. Display all request");
-            System.out.println("14. Static accounts");
+            System.out.println("1. Enter Bank");
+            System.out.println("2. Enter ATM");
+            System.out.println("3. Admin Area");
+            System.out.println("0. Exit");
             System.out.println("Select an option: ");
 
             int choice = sc.nextInt();
@@ -39,47 +28,16 @@ public class BankSystem {
 
             switch (choice) {
                 case 1:
-                    addAccount();
+                    bank();
                     break;
                 case 2:
-                    allAccounts();
+                    atm();
                     break;
                 case 3:
-                    searchByUsername();
+                    admin();
                     break;
-                case 4:
-                    depositMoney();
-                    break;
-                case 5:
-                    withdrawMoney();
-                    break;
-                case 6:
-                    System.out.println("Bye");
-                    return;
-                case 7:
-                    lastTransaction();
-                    break;
-                case 8:
-                    undoTransaction();
-                    break;
-                case 9:
-                    addBill();
-                    break;
-                case 10:
-                    processBill();
-                    break;
-                case 11:
-                    showQueue();
-                    break;
-                case 12:
-                    processAccountRequest();
-                    break;
-                case 13:
-                    displayRequests();
-                    break;
-                case 14:
-                    printAcc();
-                    break;
+                case 0:
+                    System.out.println("Good luck! Bye <3");
                 default:
                     System.out.println("Invalid action");
             }
@@ -233,5 +191,106 @@ public class BankSystem {
             System.out.println("Static Accounts: " + dataAccount[i]);
         }
     }
+    public void bank() {
+        while (true) {
+            System.out.println("1. Add account");
+            System.out.println("2. Deposit money");
+            System.out.println("3. Withdraw money");
+            System.out.println("4. Last transaction");
+            System.out.println("5. Undo transaction");
+            System.out.println("6. Bill payment");
+            System.out.println("0. Exit");
+
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            switch (choice) {
+                case 1:
+                    addAccount();
+                    break;
+                case 2:
+                    depositMoney();
+                    break;
+                case 3:
+                    withdrawMoney();
+                    break;
+                case 4:
+                    lastTransaction();
+                    break;
+                case 5:
+                    undoTransaction();
+                    break;
+                case 6:
+                    processBill();
+                    break;
+                case 0:
+                    System.out.println("Bye");
+                    return;
+                default:
+                    System.out.println("Invalid action");
+            }
+        }
+    }
+    public void atm() {
+        while(true) {
+            System.out.println("1. Check balance");
+            System.out.println("2. Withdraw money");
+            System.out.println("0. Exit");
+
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            switch(choice) {
+                case 1:
+                    searchByUsername();
+                    break;
+                case 2:
+                    withdrawMoney();
+                    break;
+                case 0:
+                    return;
+                default:
+                    System.out.println("Invalid action");
+            }
+        }
+    }
+    public void admin() {
+        while(true) {
+            System.out.println("1. View account request");
+            System.out.println("2. Accept request");
+            System.out.println("3. View bill payment");
+            System.out.println("4. Add bill");
+            System.out.println("5. All accounts");
+            System.out.println("0. Exit");
+
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            switch(choice) {
+                case 1:
+                    displayRequests();
+                    break;
+                case 2:
+                    processAccountRequest();
+                    break;
+                case 3:
+                    showQueue();
+                    break;
+                case 4:
+                    addBill();
+                    break;
+                case 5:
+                    allAccounts();
+                    System.out.println("--- Static accs ---");
+                    printAcc();
+                    break;
+                case 0:
+                    return;
+                default:
+                    System.out.println("Invalid action");
+            }
+        }
+    }
+
 
 }
