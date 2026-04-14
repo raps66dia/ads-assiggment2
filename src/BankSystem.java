@@ -1,7 +1,4 @@
-import java.util.Stack;
-import java.util.LinkedList;
-import java.util.Scanner;
-import java.util.Queue;
+import java.util.*;
 
 public class BankSystem {
     LinkedList<BankAccount> accounts = new LinkedList<>();
@@ -14,6 +11,7 @@ public class BankSystem {
         dataAccount[0] = new BankAccount(101, "Ali", 150000);
         dataAccount[1] = new BankAccount(102, "Ilyas", 200000);
         dataAccount[2] = new BankAccount(103, "Almas", 67000);
+        accounts = new LinkedList<>(Arrays.asList(dataAccount));
 
         while (true) {
             System.out.println("--- Bank System ---");
@@ -44,15 +42,10 @@ public class BankSystem {
         }
     }
     public void addAccount() {
-        System.out.println("Enter account number: ");
-        int id = sc.nextInt();
-        sc.nextLine();
         System.out.println("Enter username: ");
         String username = sc.nextLine();
-        System.out.println("Enter balance: ");
-        int balance = sc.nextInt();
 
-        accountRequests.add(new BankAccount(id, username, balance));
+        accountRequests.add(new BankAccount(0, username, 0));
         System.out.println("Request send! Waiting for Admin");
     }
     public void allAccounts() {
@@ -186,11 +179,6 @@ public class BankSystem {
         }
 
     }
-    public void printAcc() {
-        for (int i = 0; i < dataAccount.length; i++) {
-            System.out.println("Static Accounts: " + dataAccount[i]);
-        }
-    }
     public void bank() {
         while (true) {
             System.out.println("1. Add account");
@@ -281,8 +269,6 @@ public class BankSystem {
                     break;
                 case 5:
                     allAccounts();
-                    System.out.println("--- Static accs ---");
-                    printAcc();
                     break;
                 case 0:
                     return;
